@@ -15,24 +15,27 @@
  */
 class Solution {
     public boolean isBalanced(TreeNode root) {
-        return dfsHeight(root)!=-1; 
+
+        return treeheight(root)!=-1;
+        
     }
 
-    int dfsHeight(TreeNode node){
-        if (node==null){
+    public int treeheight(TreeNode node){
+        if(node==null){
             return 0;
         }
-        int lefh=dfsHeight(node.left);
-        if(lefh==-1){
+        int lhs=treeheight(node.left);
+        if(lhs==-1){
             return -1;
         }
-        int reh=dfsHeight(node.right);
-        if(reh==-1){
+        int rhs=treeheight(node.right);
+        
+        if(rhs==-1){
+             return -1;
+        }
+        if(Math.abs(lhs-rhs)>1){
             return -1;
         }
-        if(Math.abs(lefh-reh)>1){
-            return -1;
-        }
-        return 1+Math.max(lefh,reh);
+        return 1+Math.max(lhs,rhs);
     }
 }
