@@ -14,7 +14,11 @@ class Solution {
         return x;
         */
         int ans = 0;
-        for(int num : nums) ans ^= num;
+        for(int num : nums) {
+            ans ^= num;
+            System.out.println(ans);
+        }
+       
         return ans;
     }
 }
