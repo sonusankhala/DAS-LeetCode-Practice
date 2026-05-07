@@ -1,7 +1,7 @@
 class Solution {
 
     public List<List<Integer>> subsets(int[] nums) {
-        /*
+        
         int n=nums.length;
         int p=(int)Math.pow(2,n);
         List<List<Integer>> sub = new ArrayList<>();
@@ -15,11 +15,13 @@ class Solution {
             sub.add(arr);
         }
         return sub; 
-        */
+        
+        /*
         List<List<Integer>> sub = new ArrayList<>();
          List<Integer> arr=new ArrayList<>();
          createSub(nums,0,sub,arr);
          return sub;
+         */
     }
 
     public void createSub(int nums[], int i, List<List<Integer>> sub, List<Integer> arr){
