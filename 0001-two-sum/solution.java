@@ -9,6 +9,7 @@ class Solution {
             if(map.containsKey(rem)){
                r=i;
                l=map.get(rem);
+               break;
             }
             if(!map.containsKey(rem)){
                 map.put(a,i);
