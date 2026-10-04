@@ -1,32 +1,41 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        if(nums.length<1){
-            return new int [] {-1,-1};
-        }
-        int x=0;
-        int y= nums.length-1;
-        int a=Integer.MAX_VALUE, b=-1;
-        int m=x+(y-x)/2;
-          if(nums[m]<target){
-            for(int i=m;i<=y;i++){
-                if(nums[i]==target){
-                    a=Math.min(a,i);
-                    b=Math.max(b,i);
+        return new int [] {firstOcc(nums,target),lastOcc(nums,target)};
+    }
+       public int firstOcc(int[] nums, int target){
+            int l=0;
+            int h=nums.length-1;
+            int i=-1;
+            while(l<=h){
+                int m=(l+h)/2;
+                if(nums[m]==target){
+                    i=m;
+                    h=m-1;
+                }else if(nums[m]<target){
+                    l=m+1;
+                }else{
+                    h=m-1;
                 }
             }
-          }
-          else{
-            for(int i=0;i<=y;i++){
-                if(nums[i]==target){
-                    a=Math.min(a,i);
-                    b=Math.max(b,i);
+            return i;
+
+        }
+       public int lastOcc(int[] nums, int target){
+            int l=0;
+            int h=nums.length-1;
+            int i=-1;
+            while(l<=h){
+                int m=(l+h)/2;
+                if(nums[m]==target){
+                    i=m;
+                    l=m+1;
+                }else if(nums[m]<target){
+                    l=m+1;
+                }else{
+                    h=m-1;
                 }
-          } 
-         }
-         if(a==Integer.MAX_VALUE){
-            a=-1;
-         }
-        
-         return new int[] {a,b};
-    }
+            }
+            return i;
+        }
+    
 }
