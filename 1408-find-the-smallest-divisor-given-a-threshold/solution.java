@@ -1,34 +1,23 @@
 class Solution {
-    public int smallestDivisor(int[] piles, int threshold) {
-
-       /* int max=Integer.MIN_VALUE;
-        for(int i=0; i<piles.length;i++){
-            max=Math.max(max,piles[i]);
-        }
-        */
-
+    public int smallestDivisor(int[] nums, int threshold) {
         int l=1;
         int r=1000000;
         while(l<=r){
-            int mid=(l+r)/2;
-           // int x=checkSum(piles,mid,threshold);
-            if(checkSum(piles,mid,threshold)){
-                r=mid-1;
-            }
-            else{
-                l=mid+1;
+            int m=(l+r)/2;
+            if(checkSum(nums,m, threshold)){
+                r=m-1;
+            }else{
+                l=m+1;
             }
         }
-        return l;
-
-        
+        return l; 
     }
 
-    public boolean checkSum(int piles[], int mid, int t){
+    boolean checkSum(int [] nums, int m, int t){
         int sum=0;
-        for(int i=0;i<piles.length;i++){
-            sum+=Math.ceil((double)(piles[i])/mid);
+        for(int i=0;i<nums.length;i++){
+            sum+=Math.ceil((double)nums[i]/m);
         }
-        return (sum>t)?false:true;
+        return sum>t?false:true;
     }
 }
