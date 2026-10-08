@@ -1,39 +1,37 @@
 class Solution {
-    public int myAtoi(String s) {
-         s = s.trim();
-        if (s == null || s.length() == 0) {
+    public int myAtoi(String str) {
+
+        String s=str.trim();
+        
+
+        int i=0;
+        int sign=1;
+        long ans=0;
+        int n=s.length();
+        if(n<=0){
             return 0;
         }
-       
-        int maxV = Integer.MAX_VALUE;
-        int minV = Integer.MIN_VALUE;
-        int i = 0;
-        int n = s.length();
-        int sign = 1;
-        if (s.charAt(i) == '+') {
+
+        if(s.charAt(i)=='-'){
+            sign=-1;
             i++;
-        } else if (s.charAt(i) == '-') {
-            sign = -1;
+        }else if(s.charAt(i)=='+'){
+            sign=1;
             i++;
         }
-        System.out.println(s);
-        long sum = 0;
-        while (i < n && Character.isDigit(s.charAt(i))) {
-            int res = s.charAt(i)-'0';
-            sum = (sum * 10) + res;
-            if(sign==-1){
-             System.out.println(sum*sign);
+        while(i<n && Character.isDigit(s.charAt(i))){
+            ans=ans*10+(s.charAt(i)-'0');
+
+            if(ans*sign>Integer.MAX_VALUE){
+                return Integer.MAX_VALUE;
             }
-              
-            if (sum * sign <= minV) {
-                return minV;
-            }
-            if (sum *sign >= maxV) {
-                return maxV;
+            if(ans*sign<Integer.MIN_VALUE){
+                return Integer.MIN_VALUE;
             }
             i++;
         }
-        System.out.println(sum);
-        return (int) (sum * sign);
+
+        return (int)(sign*ans);
+        
     }
 }
