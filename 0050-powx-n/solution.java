@@ -1,19 +1,22 @@
 class Solution {
     public double myPow(double x, int n) {
-            if(n==0){
-            return 1;
-             }
-             long N=n;
-          if (N< 0) {
+    long N = n;
+        if (N < 0) {
             N = -N;
-            x = 1.0 / x;
         }
+        
+        double ans = fastPow(x, N);
+        return n < 0 ? 1.0 / ans : ans; // Divide at the final step
+    }
 
-        if(N%2==0){
-            return myPow(x*x, (int)(N/2));
+    private double fastPow(double x, long n) {
+        if (n == 0) return 1.0;
+        
+        double half = fastPow(x, n / 2);
+        if (n % 2 == 0) {
+            return half * half;
+        } else {
+            return half * half * x;
         }
-
-        return x*myPow(x, (int)(N-1));
-
     }
 }
