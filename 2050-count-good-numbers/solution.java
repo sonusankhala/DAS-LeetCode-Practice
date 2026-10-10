@@ -1,24 +1,28 @@
 class Solution {
+    private static final long mod=1000000007L;
     public int countGoodNumbers(long n) {
-      int mod = 1000000007;
-      return (int)(pow(5,(n+1)/2, mod) * pow(4,n/2, mod)%mod); 
+
+
+        long evenPow=(n+1)/2;
+        long oddPow=n/2;
+
+        long evenNum=modPow(5,evenPow);
+        long oddNum=modPow(4,oddPow);
+
+        return (int)(evenNum *oddNum %mod);
+        
     }
-    public long pow(long x, long n, int mod){
-        
-        // Base case for the recursion
-        if(n==0) 
-            return 1;
-        
-        // Recursively calculate x^(n/2)
-        long temp = pow(x,n/2, mod);
-        
-        // If n is even, return (x^(n/2))^2
-        if(n%2==0){
-            return (temp * temp)% mod;
+
+    long modPow(long i, long pow){
+        long result=1;
+        while(pow>0){
+             if(pow%2==1){
+            result=(result*i)%mod;
         }
-        // If n is odd, return (x^(n/2))^2 * x
-        else{
-            return (x * temp * temp)% mod;
+        i=(i*i)%mod;
+        pow /=2;
+
         }
+        return result;
     }
 }
