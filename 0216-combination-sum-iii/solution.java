@@ -1,23 +1,30 @@
 class Solution {
     public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> ans = new ArrayList<>();
+        int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-        int [] arr={1,2,3,4,5,6,7,8,9};
-        List<List<Integer>> ans=new ArrayList<>();
-        sum3(0,k,n,arr,ans, new ArrayList<Integer>());
+        generatecomb3(arr, k, n, ans, 0, new ArrayList<Integer>());
+
         return ans;
     }
-    public void sum3(int ind, int k, int n, int [] arr,List<List<Integer>> ans, List<Integer> ds){
-        if(n==0 && ds.size()==k){
-           ans.add(new ArrayList<>(ds));
-           return;
-        }
-        for(int i=ind;i<arr.length;i++){
-            if(arr[i]>n || ds.size()>k){
+
+    void generatecomb3(int[] arr, int k, int n, List<List<Integer>> ans, int i, ArrayList<Integer> sub) {
+       
+            if (n == 0 && sub.size()==k) {
+                ans.add(new ArrayList<>(sub));
+                return;
+            }
+            //return;
+        
+
+        for (int j = i; j < arr.length; j++) {
+            if (arr[j] > n || sub.size()>k) {
                 break;
             }
-            ds.add(arr[i]);
-            sum3(i+1, k, n-arr[i], arr, ans, ds);
-            ds.remove(ds.size()-1);
+            sub.add(arr[j]);
+            generatecomb3(arr, k, n - arr[j], ans, j+1, sub);
+            sub.remove(sub.size() - 1);
         }
     }
+
 }
